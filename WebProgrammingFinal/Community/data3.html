@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>data room</title>
+    <style>
+     body {
+            font-family: 'Noto Sans KR', Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #003b5c;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 2.5rem;
+        }
+
+        main {
+            max-width: 960px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #003b5c;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #003b5c;
+            padding-bottom: 10px;
+        }
+
+        .meta {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .content {
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .attachments {
+            margin-bottom: 20px;
+        }
+
+        .attachments a {
+            color: #003b5c;
+            text-decoration: none;
+            font-size: 1.0rem;
+        }
+
+        .attachments a:hover {
+            text-decoration: underline;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #003b5c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+        }
+
+        .back-button:hover {
+            background: #005b84;
+        }
+
+        footer {
+            background-color: #003b5c;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Data room</h1>
+    </header>
+    <main id="notice-detail">
+        <!-- 공지사항 내용이 동적으로 표시됩니다 -->
+    </main>
+    <footer>
+        <p>&copy; 2024 Handong University Clubs </p>
+    </footer>
+
+    <script>
+        // 조회수 관리
+        function getViews(id) {
+            const views = localStorage.getItem(`views_${id}`);
+            return views ? parseInt(views, 10) : 0;
+        }
+
+        function incrementViews(id) {
+            const currentViews = getViews(id);
+            localStorage.setItem(`views_${id}`, currentViews + 1);
+            return currentViews + 1;
+        }
+
+        // 공지사항 데이터
+        const noticeId = 3; // 현재 페이지에 고정된 공지사항 ID
+        const notice = {
+            title: "2024-2 Departmental Support Fund Application Guidelines",
+            date: "2024-11-23",
+            content: "Hello, this is DREAM, the Executive Committee of the 30th General Club Federation. <br> The departmental support fund is financial support provided by the school to strengthen club capabilities and aid their activities. The system operates on a reimbursement basis, where clubs submit a report on their expenses along with supporting receipts, which the school reviews for reimbursement.",
+            attachments: ["Evidence Documents for Subdivision Support Fund Expenditures.docx","Subdivision Support Fund Application Form.docx", "Subdivision Support Fund Expenditure Report.docx" ]
+        };
+
+        // 조회수 업데이트
+        const views = getViews(noticeId);
+
+        // DOM에 공지사항 내용 표시
+        const noticeDetail = document.getElementById("notice-detail");
+        let attachmentsHTML = notice.attachments.length
+            ? notice.attachments.map(file => `<a href="${file}" download>${file}</a>`).join("<br>")
+            : "첨부파일 없음";
+
+        noticeDetail.innerHTML = `
+            <section>
+                <h1>${notice.title}</h1>
+                <div class="meta">
+                    Date: ${notice.date}<br>
+                    Views: <span id="views">${views}</span>
+                </div>
+                <div class="content">${notice.content}</div>
+                <div class="attachments">
+                    <strong>Attachment:</strong><br>
+                    ${attachmentsHTML}
+                </div>
+                <a href="자료실.html" class="back-button">Return to the list</a>
+            </section>
+        `;
+    </script>
+</body>
+</html>

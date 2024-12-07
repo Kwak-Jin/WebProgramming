@@ -1,0 +1,92 @@
+/* Reset */
+body, h1, h2, p, ul, li, a {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+}
+
+/* Body 스타일 */
+body {
+    line-height: 1.6;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Header 스타일 */
+header {
+    background-color: #0066cc;
+    color: white;
+    padding: 15px 0;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.header-title {
+    font-size: 24px;
+}
+
+/* Navigation 스타일 */
+.nav-menu {
+    position: relative;
+}
+
+.menu-list {
+    display: flex;
+    gap: 20px;
+}
+
+.menu-item {
+    position: relative;
+}
+
+.menu-list > li > a {
+    color: white;
+    padding: 10px 15px;
+    display: block;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.menu-list > li > a:hover {
+    background-color: #004a99;
+    border-radius: 5px;
+}
+
+/* Submenu 스타일 */
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #444;
+    border-radius: 5px;
+    padding: 10px 0;
+    display: none; /* 기본적으로 숨김 */
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.submenu li a {
+    color: white;
+    padding: 8px 20px;
+    display: block;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.submenu li a:hover {
+    background-color: #555;
+}
+
+/* Submenu hover 기능 */
+.menu-item:hover .submenu {
+    display: block; /* 부모 메뉴에 마우스가 올라가면 표시 */
+}

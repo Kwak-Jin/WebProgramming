@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction of HGU Clubs</title>
+    <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Introduction to Handong Global University Club</h1>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="동아리 이름 검색">
+                <button onclick="searchClub()">Search Clubs</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <aside>
+            <h2> Categories of Club</h2>
+            <ul>
+                <li onclick="filterCategory('Religion')"> Religion </li>
+                <li onclick="filterCategory('Performance')"> Performance </li>
+                <li onclick="filterCategory('Sports')"> Sports </li>
+                <li onclick="filterCategory('Education')"> Education </li>
+                <li onclick="filterCategory('Exhibition')"> Exhibition </li>
+                <li onclick="filterCategory('Volunteer')"> Volunteer</li>
+                <li onclick="filterCategory('Computer')"> Computer </li>
+            </ul>
+        </aside>
+
+        <section id="article-container">
+            <!-- 동아리 정보는 JavaScript를 통해 동적으로 삽입 -->
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Handong Global University Clubs. All rights reserved.</p>
+    </footer>
+
+    <script src="scripts2.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항 상세보기</title>
+    <style>
+     body {
+            font-family: 'Noto Sans KR', Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #003b5c;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 2.5rem;
+        }
+
+        main {
+            max-width: 960px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #003b5c;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #003b5c;
+            padding-bottom: 10px;
+        }
+
+        .meta {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .content {
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-size: 1.0rem;
+            color: #333;
+        }
+
+        .attachments {
+            margin-bottom: 20px;
+        }
+
+        .attachments a {
+            color: #003b5c;
+            text-decoration: none;
+            font-size: 1.0rem;
+        }
+
+        .attachments a:hover {
+            text-decoration: underline;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #003b5c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+        }
+
+        .back-button:hover {
+            background: #005b84;
+        }
+
+        footer {
+            background-color: #003b5c;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Announcement</h1>
+    </header>
+    <main id="notice-detail">
+        <!-- 공지사항 내용이 동적으로 표시됩니다 -->
+    </main>
+    <footer>
+        <p>&copy; 2024 Handong University Clubs</p>
+    </footer>
+
+    <script>
+        // 조회수 관리
+        function getViews(id) {
+            const views = localStorage.getItem(`views_${id}`);
+            return views ? parseInt(views, 10) : 0;
+        }
+
+        function incrementViews(id) {
+            const currentViews = getViews(id);
+            localStorage.setItem(`views_${id}`, currentViews + 1);
+            return currentViews + 1;
+        }
+
+        // 공지사항 데이터
+        const noticeId = 1; // 현재 페이지에 고정된 공지사항 ID
+        const notice = {
+            title: "2024-2 Announcement of the results of the 2nd General Meeting of the Club Federation",
+            date: "2024-12-01",
+            content: "Hello, This is DREAM, the executive committee of the 30th General Club Association.<br> We inform you of the results of the deliberation on the agenda of the 2nd General Club Union on November 30th.<br>Agenda 1<br>Elections of the 31st General Club Federation<br>Total number of voters: 96<br> Total Voters: 93<br>Total Turnout: 96.88%<br>Pros: 37 votes<br>Opposition: 38 votes<br>Abstention: 14 votes<br>Invalid: 4 votes<br>As a result of the vote, at least two-thirds of the electors of Article 58 (2) of the General Club Union Regulations must attend, and the person who wins the most votes shall be the elected person. (However, if a candidate runs alone, it shall be voted for or against, and if the approval is less than 50%, a re-election shall be held.) It shall be announced that the candidate of the party has been elected.<br>Agenda 2<br>Revised by the General Club Federation of Handong University<br>Attendance: 170 people<br>Number of people eligible to vote: 141<br>141 votes in favor / 0 against / 0 abstention<br>As a result of the vote, 141 out of 170 members who can vote were unanimously approved in accordance with Chapter 2, Article 13, The decision is made with the approval of more than two-thirds of the registered members and a majority of the members present.<br>[Inquiry] 30th General Club Federation Executive Committee DREAM (clubunioninhgu@gmail.com )",
+            attachments: []
+        };
+
+        // 조회수 업데이트
+        const views = getViews(noticeId);
+
+        // DOM에 공지사항 내용 표시
+        const noticeDetail = document.getElementById("notice-detail");
+        let attachmentsHTML = notice.attachments.length
+            ? notice.attachments.map(file => `<a href="${file}" download>${file}</a>`).join("<br>")
+            : "";  // 첨부파일이 없을 경우 빈 문자열로 설정
+
+        noticeDetail.innerHTML = `
+            <section>
+                <h1>${notice.title}</h1>
+                <div class="meta">
+                    작성일: ${notice.date}<br>
+                    조회수: <span id="views">${views}</span>
+                </div>
+                <div class="content">${notice.content}</div>
+                <<div class="attachments">
+                    <strong>첨부파일:</strong><br>
+                    ${attachmentsHTML ? attachmentsHTML : ""}
+                </div>
+                <a href="공지사항.html" class="back-button">Return to the list</a>
+            </section>
+        `;
+    </script>
+</body>
+</html>

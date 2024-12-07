@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항 상세보기</title>
+    <style>
+     body {
+            font-family: 'Noto Sans KR', Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        header {
+            background-color: #003b5c;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 2.5rem;
+        }
+
+        main {
+            max-width: 960px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            flex: 1; /* 페이지가 짧을 때도 footer를 밀어내도록 함 */
+        }
+ 
+
+
+        h1 {
+            font-size: 2rem;
+            color: #003b5c;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #003b5c;
+            padding-bottom: 10px;
+        }
+
+        .meta {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .content {
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-size: 1.0rem;
+            color: #333;
+        }
+
+        .attachments {
+            margin-bottom: 20px;
+        }
+
+        .attachments a {
+            color: #003b5c;
+            text-decoration: none;
+            font-size: 1.0rem;
+        }
+
+        .attachments a:hover {
+            text-decoration: underline;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #003b5c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+        }
+
+        .back-button:hover {
+            background: #005b84;
+        }
+
+        footer {
+            background-color: #003b5c;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            height: 5%;
+            margin-top: auto; /* footer가 콘텐츠 아래에 위치하도록 보장 */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Announcement</h1>
+    </header>
+    <main id="notice-detail">
+        <!-- 공지사항 내용이 동적으로 표시됩니다 -->
+    </main>
+    <footer>
+        <p>&copy; 2024 Handong University Clubs</p>
+    </footer>
+
+    <script>
+        // 조회수 관리
+        function getViews(id) {
+            const views = localStorage.getItem(`views_${id}`);
+            return views ? parseInt(views, 10) : 0;
+        }
+
+        function incrementViews(id) {
+            const currentViews = getViews(id);
+            localStorage.setItem(`views_${id}`, currentViews + 1);
+            return currentViews + 1;
+        }
+
+        // 공지사항 데이터
+        const noticeId = 5; // 현재 페이지에 고정된 공지사항 ID
+        const notice = {
+            title: "2024-2 Semester Final Activity Registration Submission",
+            date: "2024-12-01",
+            content: "Hello, We are DREAM, the executive committee of the 30th General Club Association. <br><br> At the end of this semester, the activity registrant will receive and register the submitted file by November 27th.<br><br> For each club president, please download the attached file and send us the list of people who have been active as of the semester. <br><br> - Please submit [Attachment 1] and [Attachment 3] as PDF files.<br> - For the 2024-2 Final Activity Registry (.xlsx) file of [Attachment 2], please indicate your position only in four types: Chairman, Vice Chairman, General Secretary, and Member.<br> - Deadline: until 11:59 p.m. on November 27th.<br> Submission: clubuniondeskhgu@gmail.com <br><br> Please submit the email title and file title as follows. <br> - > E-mail title: [Club name] 2024-2 Final activity registrar<br><br> - > (The 'club name' part will be revised and submitted according to the name of each club.)<br> - > Don't send it after compressing it into a nest, but please submit it by attaching it to each file.<br><br> - 1. [Attachment1] [Club Name] 2024-2 Final Club Activity Report (.pdf)<br> - All clubs are required.<br> - Please fill out and submit it carefully based on this semester (2024-2).<br> - You can omit the members' signature.<br>- 2. [Attachment 2] [Club Name] 2024-2 Final Activity Registry (.xlsx)<br>- All clubs are required.<br> - Students on leave of absence, graduates, etc. may not be included, but only enrolled students may be included.<br> - The position can only be entered in four types: chairman, vice-chairman, general secretary, and member.<br><br> 3. [Attachment 3] [Club Name] Inauguration Letter of Adviser in the First Half of 2024-2 (.pdf)<br>- If the supervisor changes, you must submit it. (Based on the school regulations 3-4-2 group registration)<br>- If you need to submit it, please get the signature of the supervisor and scan it and submit it.<br>- The supervisor does not have to submit the same clubs as the previous semester.<br><br>※Please note that if you fail to submit your club activity registration within the deadline, you will not be able to attend the club representatives' meeting and the general meeting of the club association at the end of the semester, and penalties will be imposed.<br>- the relevant rules -<br>Chapter 8 Registration<br>Article 42 (Re-registration)<br>① All clubs shall re-register at the plenary session by filling out a group activity register of at least 15 members each semester.<br>② In Chung's judgment, if it is difficult to submit a group activity register of more than 15 members due to natural disasters, disasters, etc. affecting club activities, a group activity register of more than 12 members shall be submitted only to Jeongdong-ari.<br><br>Chapter 9 Disciplinary Actions<br>Article 47 (Disciplinary and Application Period)<br>7. If you violate the deadline for submitting a plan and settlement report for each semester (10 points)<br><br>So there is some power, some consolation of love, some companionship, some mercy, or mercy in Christ. Let us share our hearts and share the same love and unite our hearts. <br><br>Inquiries: Administrative Bureau of the Executive Committee of the General Club Federation (clubuniondeskhgu@gmail.com )",
+            attachments: []
+        };
+
+        // 조회수 업데이트
+        const views = getViews(noticeId);
+
+        // DOM에 공지사항 내용 표시
+        const noticeDetail = document.getElementById("notice-detail");
+        let attachmentsHTML = notice.attachments.length
+            ? notice.attachments.map(file => `<a href="${file}" download>${file}</a>`).join("<br>")
+            : "";  // 첨부파일이 없을 경우 빈 문자열로 설정
+
+        noticeDetail.innerHTML = `
+            <section>
+                <h1>${notice.title}</h1>
+                <div class="meta">
+                    작성일: ${notice.date}<br>
+                    조회수: <span id="views">${views}</span>
+                </div>
+                <div class="content">${notice.content}</div>
+                <<div class="attachments">
+                    <strong>첨부파일:</strong><br>
+                    ${attachmentsHTML ? attachmentsHTML : ""}
+                </div>
+                <a href="공지사항.html" class="back-button">Return to the list</a>
+            </section>
+        `;
+    </script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항 상세보기</title>
+    <style>
+     body {
+            font-family: 'Noto Sans KR', Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #003b5c;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 2.5rem;
+        }
+
+        main {
+            max-width: 960px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #003b5c;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #003b5c;
+            padding-bottom: 10px;
+        }
+
+        .meta {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .content {
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-size: 1.0rem;
+            color: #333;
+        }
+
+        .attachments {
+            margin-bottom: 20px;
+        }
+
+        .attachments a {
+            color: #003b5c;
+            text-decoration: none;
+            font-size: 1.0rem;
+        }
+
+        .attachments a:hover {
+            text-decoration: underline;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #003b5c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+        }
+
+        .back-button:hover {
+            background: #005b84;
+        }
+
+        footer {
+            background-color: #003b5c;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Announcement</h1>
+    </header>
+    <main id="notice-detail">
+        <!-- 공지사항 내용이 동적으로 표시됩니다 -->
+    </main>
+    <footer>
+        <p>&copy; 2024 Handong University Clubs</p>
+    </footer>
+
+    <script>
+        // 조회수 관리
+        function getViews(id) {
+            const views = localStorage.getItem(`views_${id}`);
+            return views ? parseInt(views, 10) : 0;
+        }
+
+        function incrementViews(id) {
+            const currentViews = getViews(id);
+            localStorage.setItem(`views_${id}`, currentViews + 1);
+            return currentViews + 1;
+        }
+
+        // 공지사항 데이터
+        const noticeId = 3; // 현재 페이지에 고정된 공지사항 ID
+        const notice = {
+            title: "The 31th Student Club Union Presidency Election Result Announcement",
+            date: "2024-12-01",
+            content: "Dear beloved students of Handong Global University, this is the Central Elections Committee (CEC).<br> We announce the Final Result of the 31st Student Club Union Presidency Election, conducted during the Student Club Assembly on November 29th, 2024, at 08:00 PM.<br>According to Article 58, Paragraph 2 of the Student Club Union's bylaws, *more than two-thirds of the electoral college must be present, and the candidate with the most votes shall be elected. (However, in the case of a single candidate, the election shall be conducted as a vote of confidence, and if the approval rate is less than 50%, a re-election shall be held.)* **Based on the voting results, as the approval rate was below 50% of the valid votes,** we hereby announce that the 31st Student Club Union presidential candidate, Seunghyun Lee(Class of 2020), and vice-presidential candidate, Jiha Nam(Class of 2023), **have not been elected.**<br> **[The 31st Student Club Union Presidency Election Result]**<br>Total voters: 96<br>Number of voters: 93<br>Total voter turnout: 96.88%<br> Agree 37 votes / 39.78%<br>Disagree 38 votes / 40.86%<br>Abstention 14 votes / 15.05%<br>Invalid 4 votes / 4.30%<br>According to Article 62 (Re-election) of the Student Club Union's bylaws<br>Paragraph 1 *A re-election shall be conducted in the following cases*<br>1. *When the approval rate in a confidence vote for a single candidate is less than 50%.*<br>Paragraph 2 *The timing and method of the re-election shall be determined by the resolution of the Central Elections Committee.*<br>**Therefore, we announce that the Re-election for the Student Club Union Presidency will be held in the first half of next year.**<br>If you have any inquiries or objections, please contact the Central Elections Committee ([vote@handong.edu](mailto:vote@handong.edu)).",
+            attachments: []
+        };
+
+        // 조회수 업데이트
+        const views = getViews(noticeId);
+
+        // DOM에 공지사항 내용 표시
+        const noticeDetail = document.getElementById("notice-detail");
+        let attachmentsHTML = notice.attachments.length
+            ? notice.attachments.map(file => `<a href="${file}" download>${file}</a>`).join("<br>")
+            : "";  // 첨부파일이 없을 경우 빈 문자열로 설정
+
+        noticeDetail.innerHTML = `
+            <section>
+                <h1>${notice.title}</h1>
+                <div class="meta">
+                    작성일: ${notice.date}<br>
+                    조회수: <span id="views">${views}</span>
+                </div>
+                <div class="content">${notice.content}</div>
+                <<div class="attachments">
+                    <strong>첨부파일:</strong><br>
+                    ${attachmentsHTML ? attachmentsHTML : ""}
+                </div>
+                <a href="공지사항.html" class="back-button">Return to the list</a>
+            </section>
+        `;
+    </script>
+</body>
+</html>
