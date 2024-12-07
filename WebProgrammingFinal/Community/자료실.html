@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data room</title>
+    <style>
+        body {
+    font-family: 'Noto Sans KR', Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #003b5c;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 1.5rem;
+}
+
+main {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #003b5c;
+    color: white;
+    font-weight: bold;
+}
+
+td {
+    background-color: #ffffff;
+    color: #555;
+}
+
+tr:hover td {
+    background-color: #f4f4f4;
+}
+
+a {
+    color: #003b5c;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #0072bb;
+    text-decoration: underline;
+}
+
+footer {
+    background-color: #003b5c;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Data room</h1>
+    </header>
+    <main>
+        <section class="notice-board">
+            <table>
+                <thead>
+                    <tr>
+                        <th>NO.</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Date</th>
+                        <th>Views</th>
+                    </tr>
+                </thead>
+                <tbody id="notice-list">
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <a href="data1.html" target="_blank" onclick="increaseViewCount(1)">
+                                Submission of Final Activity Registration Form for 2024-2 Semester
+                            </a>
+                        </td>
+                        <td>Admin</td>
+                        <td>2024-11-20</td>
+                        <td id="view-count-1">0</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <a href="data2.html" target="_blank" onclick="increaseViewCount(2)">
+                                Notice of Candidate Registration and Schedule for the 31st General Club Federation Presidential Election
+                            </a>
+                        </td>
+                        <td>Admin</td>
+                        <td>2024-11-21</td>
+                        <td id="view-count-2">0</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <a href="data3.html" target="_blank" onclick="increaseViewCount(3)">
+                                2024-2 Departmental Support Fund Application Guidelines
+                            </a>
+                        </td>
+                        <td>Admin</td>
+                        <td>2024-11-23</td>
+                        <td id="view-count-3">0</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <a href="data4.html" target="_blank" onclick="increaseViewCount(4)">
+                                Notice of the 1st and 2nd Club Promotion Reviews for the 2024 Second Semester
+                            </a>
+                        </td>
+                        <td>Admin</td>
+                        <td>2024-11-25</td>
+                        <td id="view-count-4">0</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            <a href="data5.html" target="_blank" onclick="increaseViewCount(5)">
+                                Notice of the 1st and 2nd Club Promotion Reviews for the 2024 Second Semester
+                            </a>
+                        </td>
+                        <td>Admin</td>
+                        <td>2024-11-26</td>
+                        <td id="view-count-5">0</td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Handong University Clubs</p>
+    </footer>
+
+    <script>
+         // 조회수 증가 함수
+    function increaseViewCount(id) {
+        const viewCountKey = `views_${id}`;
+        let currentCount = parseInt(localStorage.getItem(viewCountKey), 10) || 0;
+        currentCount += 1;
+        localStorage.setItem(viewCountKey, currentCount);
+
+        // 화면에 조회수 표시
+        document.getElementById(`view-count-${id}`).textContent = currentCount;
+    }
+
+    // 페이지 로드 시 기존 조회수 표시
+    window.onload = function() {
+        document.querySelectorAll('[id^="view-count-"]').forEach(element => {
+            const id = element.id.split('-')[2]; // "view-count-{id}"에서 id 추출
+            const viewCount = localStorage.getItem(`views_${id}`) || 0;
+            element.textContent = viewCount;
+        });
+    };
+
+        // 페이지 로드 시 기존 조회수 표시
+        window.onload = function() {
+            const viewCount1 = localStorage.getItem('views_1') || 0;
+            const viewCount2 = localStorage.getItem('views_2') || 0;
+            const viewCount3 = localStorage.getItem('views_3') || 0;
+            const viewCount4 = localStorage.getItem('views_4') || 0;
+            const viewCount5 = localStorage.getItem('views_5') || 0;
+            const viewCount6 = localStorage.getItem('views_6') || 0;
+            const viewCount7 = localStorage.getItem('views_7') || 0;
+            const viewCount8 = localStorage.getItem('views_8') || 0;
+            document.getElementById('view-count-1').textContent = viewCount1;
+            document.getElementById('view-count-2').textContent = viewCount2;
+            document.getElementById('view-count-3').textContent = viewCount3;
+            document.getElementById('view-count-4').textContent = viewCount4;
+            document.getElementById('view-count-5').textContent = viewCount5;
+            document.getElementById('view-count-6').textContent = viewCount6;
+            document.getElementById('view-count-7').textContent = viewCount7;
+            document.getElementById('view-count-8').textContent = viewCount8;
+        };
+    </script>
+</body>
+</html>
